@@ -1,3 +1,4 @@
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class School {
 		Repository rep = new Repository();
 		Teacher henry = new Teacher();
 		TableAction tables = new TableAction();
-		TableAction Actions = new TableAction();
+		Select select = new Select();
 		
 		math.setName("math");
 		math.setTeacher(brayan);
@@ -46,16 +47,13 @@ public class School {
 		
 		mathExam.setCourse(math);
 		mathExam.setDate(date);
-		mathExam.setResualt(19);
+		mathExam.setScore(19);
 		mathExam.setStudent(Taha);
-		mathExam.setTeacher(brayan);
 		mathExam.Strings();
 		
-		rep.CreateDatabase("tahaDataBase.db");
+		rep.CreateDatabase();
 		tables.createCourceTable();
 		tables.createTeacherTable();
 		tables.createStudentTable();
-		Actions.TeacherInsert(brayan);
 	}
-
 }

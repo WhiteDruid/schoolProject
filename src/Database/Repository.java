@@ -3,7 +3,9 @@ package Database;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Repository  {
 	
@@ -11,8 +13,8 @@ public class Repository  {
 
 	}
 	
-	public static void CreateDatabase(String filename) {
-		String url = "jdbc:sqlite:C:/sqlite/db/" + filename;
+	public static void CreateDatabase() {
+		String url = Url.getUrl();
 		try(Connection conn = DriverManager.getConnection(url)) {
 			DatabaseMetaData data = conn.getMetaData();
 			System.out.println("\n" + data.getDriverName() + " created data base " + data.getDriverVersion());
@@ -40,7 +42,6 @@ public class Repository  {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	
 }
