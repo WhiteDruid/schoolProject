@@ -55,5 +55,13 @@ public class School {
 		tables.createCourceTable();
 		tables.createTeacherTable();
 		tables.createStudentTable();
+		tables.StudentInsert(Taha);
+		select.selcetStudentId();
+		System.out.println(select.selcetStudentId().size());
+		for(int i = 0; i < 1;i++){
+			System.out.println(select.selcetStudentId().toString());
+		}
+		
+		
 	}
 }
