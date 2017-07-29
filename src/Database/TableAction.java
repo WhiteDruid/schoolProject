@@ -161,6 +161,25 @@ public class TableAction {
 			 conn.close();
 		 }
 	}
+	
+	public void CourseInsert(String CourseName , String TeacherName) throws SQLException {
+		 String url = Url.getUrl();
+		 String sql = "INSERT INTO Course(CourseId ,CourseName ,TeacherName) VALUES(?,?,?)"; 
+		 Connection conn = null;
+		 PreparedStatement state = null;
+		 try { 
+			 conn = DriverManager.getConnection(url);
+			 state = conn.prepareStatement(sql );
+			 state.setString(2, CourseName.toLowerCase());
+			 state.setString(3, TeacherName.toLowerCase());
+			 state.executeUpdate();
+		 } catch(SQLException e) {
+	            System.out.println(e.getMessage());
+		 } finally {
+			 conn.close();
+		 }
+	}
+
 
 	public void TeacherInsert(Teacher teacher) throws SQLException {
 		 String url = Url.getUrl();
@@ -179,6 +198,25 @@ public class TableAction {
 			 conn.close();
 		 }
 	}
+	
+	public void TeacherInsert(String teacherName , int TeacherAge) throws SQLException {
+		 String url = Url.getUrl();
+		 String sql = "INSERT INTO Teacher(TeacherId ,TeacherAge ,TeacherName) VALUES(?,?,?)"; 
+		 Connection conn = null;
+		 PreparedStatement state = null;
+		 try { 
+			 conn = DriverManager.getConnection(url);
+			 state = conn.prepareStatement(sql);
+			 state.setInt(2, TeacherAge);
+			 state.setString(3, teacherName.toLowerCase());
+			 state.executeUpdate();
+		 } catch(SQLException e) {
+	            System.out.println(e.getMessage());
+		 } finally {
+			 conn.close();
+		 }
+	}
+
 
 	public void StudentInsert(Student student) throws SQLException {
 		 String url = Url.getUrl();
@@ -198,6 +236,25 @@ public class TableAction {
 		 }
 	}
 
+	public void StudentInsert(String teacherName , int TeacherAge) throws SQLException {
+		 String url = Url.getUrl();
+		 String sql = "INSERT INTO Student(StudentId ,Studentname ,StudentAge) VALUES(?,?,?)"; 
+		 Connection conn = null;
+		 PreparedStatement state = null;
+		 try { 
+			 conn = DriverManager.getConnection(url);
+			 state = conn.prepareStatement(sql);
+			 state.setString(2, teacherName.toLowerCase());
+			 state.setInt(3, TeacherAge);
+			 state.executeUpdate();
+		 } catch(SQLException e) {
+	            System.out.println(e.getMessage());
+		 } finally {
+			 conn.close();
+		 }
+	}
+
+	
 	public static void deletFromCourse(String where) throws SQLException {
 		String url = Url.getUrl();
 		String sql = "delete " + "from Course where " + where + ";";
@@ -261,8 +318,6 @@ public class TableAction {
 		 conn.close();
 	 }
 	}
-	
-	
 	
 }
 	

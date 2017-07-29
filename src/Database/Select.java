@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import GUI.ui;
+
 public class Select {
 	
 	private static String url;
@@ -48,7 +50,7 @@ public class Select {
 	 }
   }
 	
-	public List<String> selcetStudentAge() {
+	public static List<String> selcetStudentAge() {
 		url = Url.getUrl();
 		String sql = "Select StudentAge "+ " From " + "Student" +  ";";
 		Connection conn = null;
@@ -59,6 +61,7 @@ public class Select {
 			conn =  connection();
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);	
+			rs.rowUpdated();
 			while(rs.next()) {
 				strings.add(rs.getString("StudentAge"));
 				strings.add("\n");
@@ -70,7 +73,7 @@ public class Select {
 		return null ;
 	}
 
-	public List<String> selcetTeacherAge() {
+	public static List<String> selcetTeacherAge() {
 		url = Url.getUrl();
 		String sql = "Select TeacherAge "+ " From " + "Teacher" +  ";";
 		Connection conn = null;
@@ -92,7 +95,7 @@ public class Select {
 		return null ;
 	}
 	
-	public List<String> selcetTeacherName() {
+	public static List<String> selcetTeacherName() {
 		url = Url.getUrl();
 		String sql = "Select TeacherName "+ " From " + "Teacher" +  ";";
 		Connection conn = null;
@@ -114,7 +117,7 @@ public class Select {
 		return null ;
 	}
 	
-	public List<String> selcetTeacherId() {
+	public static List<String> selcetTeacherId() {
 		url = Url.getUrl();
 		String sql = "Select TeacherId "+ " From " + "Teacher" +  ";";
 		Connection conn = null;
@@ -136,7 +139,7 @@ public class Select {
 		return null ;
 	}
 	
-	public List<String> selcetStudentName() {
+	public static List<String> selcetStudentName() {
 		url = Url.getUrl();
 		String sql = "Select StudentName "+ " From " + "Student" +  ";";
 		Connection conn = null;
@@ -159,7 +162,7 @@ public class Select {
 	}
 
 	
-	public List<String> selcetStudentId() {
+	public static List<String> selcetStudentId() {
 		url = Url.getUrl();
 		String sql = "Select StudentId "+ " From " + "Student" +  ";";
 		Connection conn = null;
@@ -180,6 +183,74 @@ public class Select {
 	 }
 		return null ;
 	}
+	
+	public static List<String> selcetCourseId() {
+		url = Url.getUrl();
+		String sql = "Select CourseId "+ " From " + "Course" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getString("CourseId"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+	
+	public static List<String> selcetCourseName() {
+		url = Url.getUrl();
+		String sql = "Select CourseName "+ " From " + "Course" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getString("CourseName"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
+	
+	public static List<String> selcetCourseTeacher() {
+		url = Url.getUrl();
+		String sql = "Select TeacherName "+ " From " + "Course" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getString("TeacherName"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+	
 	
 	public static void selectAllTeacher() throws SQLException {
 		 url = Url.getUrl();
@@ -226,5 +297,5 @@ public class Select {
 		 conn.close();
 	 }
 	}
-	
+		
 }

@@ -23,8 +23,8 @@ public class Repository  {
 		}
 	}
 
-	public static Connection Connection (String filename) {
-		String url = "jdbc:sqlite:C:/sqlite/db/" + filename;
+	public static Connection Connection () {
+		String url = Url.getUrl();
 		Connection conn = null ;
 		try {
 			conn = DriverManager.getConnection(url);
