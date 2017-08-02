@@ -55,10 +55,13 @@ public class School {
 		tables.createCourceTable();
 		tables.createTeacherTable();
 		tables.createStudentTable();
-		tables.StudentInsert(Taha);
-		select.selcetStudentId();
-		tables.CourseInsert(math);
+		tables.createWiringTable();
 		
-		
+		if(select.selcetTeacherIdArray().contains(8)){
+			System.out.println("true");
+		}
+		int y = 12; 
+		TableAction.deletFromWiringTeacher(y);
+
 	}
 }

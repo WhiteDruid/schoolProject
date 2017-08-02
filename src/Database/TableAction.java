@@ -17,7 +17,7 @@ public class TableAction {
 		 String url = Url.getUrl();
 		 String sql = "CREATE TABLE IF NOT EXISTS Student(\n"
 	                + "StudentId integer PRIMARY KEY AUTOINCREMENT,\n"
-	                + "Studentname text NOT NULL,\n"
+	                + "Studentname text not null ,\n"
 	                + "StudentAge integer NOT NULL, \n"
 	                + "CourseId integer, \n"
 	                + "TeacherId integet , \n"
@@ -76,8 +76,9 @@ public class TableAction {
 	                + "TeacherId integer PRIMARY KEY AUTOINCREMENT,\n"
 	                + "TeacherAge integer NOT NULL, \n"
 	     		    + "TeacherName text NOT NULL,\n"
+	                + "StudentNames text , \n"
 	                + "CourseId integer, \n"
-	                + "FOREIGN KEY (CourseId) REFERENCES Course(CourseId)\n"
+	                + "FOREIGN KEY (CourseId) REFERENCES Student(CourseId)\n"
 	                + ");"; 
 		 Connection conn = null;
 		 Statement state = null;
@@ -92,6 +93,31 @@ public class TableAction {
 			 conn.close();
 		 }
 	}
+	
+	public static void createWiringTable() throws SQLException {
+		 String url = Url.getUrl();
+		 String sql = "CREATE TABLE IF NOT EXISTS Wiring(\n"
+	                + "WiringId integer PRIMARY KEY AUTOINCREMENT,\n"
+	                + "teacherId integer NOT NULL, \n"
+	     		    + "courseId text NOT NULL,\n"
+	                + "studentId text NOT NULL , \n"
+	                + "FOREIGN KEY (CourseId) REFERENCES Course(CourseId)\n"
+	                + "FOREIGN KEY (studentId) REFERENCES Student(StudentId)\n"
+	                + "FOREIGN KEY (teacherId) REFERENCES Teacher(TeacherId)\n"
+	                + ");"; 
+		 Connection conn = null;
+		 Statement state = null;
+		 try { 
+			 conn = DriverManager.getConnection(url);
+			 state = conn.createStatement();
+			 state.execute(sql);
+		 } catch(SQLException e) {
+	            System.out.println(e.getMessage());
+		 } finally {
+			 conn.close();
+		 }
+	}
+
 
 	public static boolean isExist(String name) throws SQLException {
 		 boolean ret=false;
@@ -123,7 +149,6 @@ public class TableAction {
 		 String sql = "INSERT INTO Course(CourseId ,CourseName ,TeacherName) VALUES(?,?,?)"; 
 		 Connection conn = null;
 		 PreparedStatement state = null;
-		 PreparedStatement sta = null;
 		 try { 
 		 		conn = DriverManager.getConnection(url);
 		 			if(isExist(courseName) == false){
@@ -253,6 +278,26 @@ public class TableAction {
 			 conn.close();
 		 }
 	}
+	
+	public void wiringInsert(int studentId  , int teacherId , int CourseId) throws SQLException {
+		 String url = Url.getUrl();
+		 String sql = "INSERT INTO Wiring( WiringId ,  StudentId ,teacherId ,CourseId) VALUES(?,?,?,?)"; 
+		 Connection conn = null;
+		 PreparedStatement state = null;
+		 try { 
+			 conn = DriverManager.getConnection(url);
+			 state = conn.prepareStatement(sql);
+			 state.setInt(2 , studentId);
+			 state.setInt(3, teacherId);
+			 state.setInt(4, CourseId);
+			 state.executeUpdate();
+		 } catch(SQLException e) {
+	            System.out.println(e.getMessage());
+		 } finally {
+			 conn.close();
+		 }
+	}
+
 
 	
 	public static void deletFromCourse(String where) throws SQLException {
@@ -286,7 +331,55 @@ public class TableAction {
 		 conn.close();
 	 }
 	}
+	
+	public static void deletFromWiringTeacher(int where) throws SQLException {
+		String url = Url.getUrl();
+		String sql = "delete  " + "from Wiring where TeacherId = " + where + ";";
+		Connection conn = null;
+		Statement stat = null;
+		try { 
+			conn = DriverManager.getConnection(url);
+			stat = conn.createStatement();
+			stat.executeUpdate(sql);
+		}catch(SQLException e) {
+            System.out.println(e.getMessage());
+	 } finally {
+		 conn.close();
+	 }
+	}
 
+	public static void deletFromWiringStudent(int where) throws SQLException {
+		String url = Url.getUrl();
+		String sql = "delete  " + "from Wiring where StudentId = " + where + ";";
+		Connection conn = null;
+		Statement stat = null;
+		try { 
+			conn = DriverManager.getConnection(url);
+			stat = conn.createStatement();
+			stat.executeUpdate(sql);
+		}catch(SQLException e) {
+            System.out.println(e.getMessage());
+	 } finally {
+		 conn.close();
+	 }
+	}
+
+	public static void deletFromWiringCourse(int where) throws SQLException {
+		String url = Url.getUrl();
+		String sql = "delete  " + "from Wiring where CourseId = " + where + ";";
+		Connection conn = null;
+		Statement stat = null;
+		try { 
+			conn = DriverManager.getConnection(url);
+			stat = conn.createStatement();
+			stat.executeUpdate(sql);
+		}catch(SQLException e) {
+            System.out.println(e.getMessage());
+	 } finally {
+		 conn.close();
+	 }
+	}
+	
 	public static void deletFromStudent(String where) throws SQLException {
 		String url = Url.getUrl();
 		String sql = "delete " + "from Student where " + where + ";";
@@ -303,9 +396,26 @@ public class TableAction {
 	 }
 	}
 
-	public static void update(String column ,String set,String where) throws SQLException {
+	public static void deletFromList(String ListName , String Column ,int where) throws SQLException {
 		String url = Url.getUrl();
-		String sql = "UPDATE "+ column + "\n SET " + set + "\n where " + where + ";";
+		String sql = "delete " + "from " + ListName + " where " + Column + "Id= " + where + ";";
+		Connection conn = null;
+		Statement stat = null;
+		try { 
+			conn = DriverManager.getConnection(url);
+			stat = conn.createStatement();
+			stat.executeUpdate(sql);
+		}catch(SQLException e) {
+            System.out.println(e.getMessage());
+	 } finally {
+		 conn.close();
+	 }
+	}
+
+	
+	public static void update(String tableName ,String column , int where) throws SQLException {
+		String url = Url.getUrl();
+		String sql = "UPDATE " + tableName  + " SET " + column + " where " + tableName+"Id = " + where + ";";
 		Connection conn = null;
 		Statement stat = null;
 		try { 
@@ -318,6 +428,42 @@ public class TableAction {
 		 conn.close();
 	 }
 	}
+	
+	public static void updateTeacher(String column , int where) throws SQLException {
+		String url = Url.getUrl();
+		String sql = "INSERT INTO Teacher(StudentNames) VALUES(?,?,?) where teacherId =" + where + ";";
+		Connection conn = null;
+		Statement stat = null;
+		try { 
+			conn = DriverManager.getConnection(url);
+			stat = conn.createStatement();
+			stat.executeUpdate(sql);
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 } finally {
+		 conn.close();
+	 }
+	}
+
+	public void wiringInsert(String studentId, int teacherId, int courseId) throws SQLException {
+		 String url = Url.getUrl();
+		 String sql = "INSERT INTO Wiring( WiringId ,  StudentId ,teacherId ,CourseId) VALUES(?,?,?,?)"; 
+		 Connection conn = null;
+		 PreparedStatement state = null;
+		 try { 
+			 conn = DriverManager.getConnection(url);
+			 state = conn.prepareStatement(sql);
+			 state.setString(2 , studentId);
+			 state.setInt(3, teacherId);
+			 state.setInt(4, courseId);
+			 state.executeUpdate();
+		 } catch(SQLException e) {
+	            System.out.println(e.getMessage());
+		 } finally {
+			 conn.close();
+		 }		
+	}
+
 	
 }
 	

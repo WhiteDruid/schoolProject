@@ -17,7 +17,6 @@ public class Repository  {
 		String url = Url.getUrl();
 		try(Connection conn = DriverManager.getConnection(url)) {
 			DatabaseMetaData data = conn.getMetaData();
-			System.out.println("\n" + data.getDriverName() + " created data base " + data.getDriverVersion());
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}

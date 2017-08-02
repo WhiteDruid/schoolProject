@@ -72,6 +72,100 @@ public class Select {
 	 }
 		return null ;
 	}
+	
+	public static List<String> selcetWiringId() {
+		url = Url.getUrl();
+		String sql = "Select wiringId "+ " From " + "Wiring" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			rs.rowUpdated();
+			while(rs.next()) {
+				strings.add(rs.getString("wiringId"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
+	public static List<String> selcetTeacherIdWiring() {
+		url = Url.getUrl();
+		String sql = "Select teacherId "+ " From " + "Wiring" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			rs.rowUpdated();
+			while(rs.next()) {
+				strings.add(rs.getString("teacherId"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+	
+	public static List<String> selcetStudentIdWiring() {
+		url = Url.getUrl();
+		String sql = "Select studentId "+ " From " + "Wiring" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			rs.rowUpdated();
+			while(rs.next()) {
+				strings.add(rs.getString("studentId"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
+	public static List<String> selcetCourseIdWiring() {
+		url = Url.getUrl();
+		String sql = "Select courseId "+ " From " + "Wiring" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			rs.rowUpdated();
+			while(rs.next()) {
+				strings.add(rs.getString("courseId"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
+	
 
 	public static List<String> selcetTeacherAge() {
 		url = Url.getUrl();
@@ -95,7 +189,96 @@ public class Select {
 		return null ;
 	}
 	
-	public static List<String> selcetTeacherName() {
+	public static ArrayList<Integer> selcetCourseIdArray() {
+		url = Url.getUrl();
+		String sql = "Select  courseId "+ " From " + "Course" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		ArrayList<Integer> strings = new ArrayList<Integer>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getInt("courseId"));
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
+	
+	public static ArrayList<Integer> selcetTeacherIdArray() {
+		url = Url.getUrl();
+		String sql = "Select  teacherId "+ " From " + "Teacher" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		ArrayList<Integer> strings = new ArrayList<Integer>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getInt("teacherId"));
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+	
+
+	
+	public static ArrayList<Integer> selcetTeacherIdArrayWiring() {
+		url = Url.getUrl();
+		String sql = "Select  teacherId "+ " From " + "Wiring" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		ArrayList<Integer> strings = new ArrayList<Integer>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getInt("teacherId"));
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+	
+	public static ArrayList<Integer> selcetStudentIdArray() {
+		url = Url.getUrl();
+		String sql = "Select  StudentId "+ " From " + "Student" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		ArrayList<Integer> strings = new ArrayList<Integer>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getInt("studentId"));
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
+
+	
+	public static List<String> selcetteacherName() {
 		url = Url.getUrl();
 		String sql = "Select TeacherName "+ " From " + "Teacher" +  ";";
 		Connection conn = null;
@@ -251,6 +434,72 @@ public class Select {
 		return null ;
 	}
 	
+	public static List<String> selcetWiringTeacherInnerJoin() {
+		url = Url.getUrl();
+		String sql = "Select teacherName "+ " From " + "  Teacher INNER JOIN Wiring On Teacher.teacherId = Wiring.teacherId  " +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getString("teacherName"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+	
+	public static List<String> selcetWiringStudentInnerJoin() {
+		url = Url.getUrl();
+		String sql = "Select studentName "+ " From " + " Student INNER JOIN Wiring On student.studentId = Wiring.studentId   " +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getString("studentName"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
+	public static List<String> selcetWiringCourseInnerJoin() {
+		url = Url.getUrl();
+		String sql = "Select CourseName "+ " From " + "Course INNER JOIN Wiring On Course.courseId  = Wiring.courseId  " +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getString("CourseName"));
+				strings.add("\n");
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
 	
 	public static void selectAllTeacher() throws SQLException {
 		 url = Url.getUrl();
@@ -297,5 +546,6 @@ public class Select {
 		 conn.close();
 	 }
 	}
+	
 		
 }
