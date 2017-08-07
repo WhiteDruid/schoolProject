@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import model.Course;
 import model.Student;
@@ -445,23 +446,30 @@ public class TableAction {
 	 }
 	}
 
-	public void wiringInsert(String studentId, int teacherId, int courseId) throws SQLException {
+	public void wiringInsert(List<String> checkedItems, int teacherId, int courseId) throws SQLException {
 		 String url = Url.getUrl();
-		 String sql = "INSERT INTO Wiring( WiringId ,  StudentId ,teacherId ,CourseId) VALUES(?,?,?,?)"; 
+		 String sql = "INSERT INTO Wiring( WiringId , StudentId ,teacherId ,CourseId) VALUES(?,?,?,?)"; 
 		 Connection conn = null;
 		 PreparedStatement state = null;
 		 try { 
 			 conn = DriverManager.getConnection(url);
 			 state = conn.prepareStatement(sql);
-			 state.setString(2 , studentId);
-			 state.setInt(3, teacherId);
-			 state.setInt(4, courseId);
-			 state.executeUpdate();
+			 for(int i = 0 ; i < checkedItems.size() ; i++){
+			 	 String hi = checkedItems.toString();
+			 	 while(i < checkedItems.size()){
+				 state.setInt(2 , Integer.parseInt(checkedItems.get(i)));
+				 state.setInt(3, teacherId);
+				 state.setInt(4, courseId);
+				 state.executeUpdate();
+				 i++;
+			 	 }
+			  }
 		 } catch(SQLException e) {
 	            System.out.println(e.getMessage());
 		 } finally {
 			 conn.close();
 		 }		
+		
 	}
 
 	

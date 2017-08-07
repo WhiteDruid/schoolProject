@@ -456,6 +456,27 @@ public class Select {
 		return null ;
 	}
 	
+	public static List<String> selcetWiringTeacherInnerJoin2() {
+		url = Url.getUrl();
+		String sql = "Select teacherName "+ " From " + "  Teacher   " +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()){
+				strings.add(rs.getString("teacherName"));
+			}			
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+	
 	public static List<String> selcetWiringStudentInnerJoin() {
 		url = Url.getUrl();
 		String sql = "Select studentName "+ " From " + " Student INNER JOIN Wiring On student.studentId = Wiring.studentId   " +  ";";
@@ -477,6 +498,28 @@ public class Select {
 	 }
 		return null ;
 	}
+	
+	public static List<String> selcetWiringStudentInnerJoin2() {
+		url = Url.getUrl();
+		String sql = "Select studentName "+ " From " + " Student    " +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getString("studentName"));
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
+
 
 	public static List<String> selcetWiringCourseInnerJoin() {
 		url = Url.getUrl();
@@ -499,7 +542,27 @@ public class Select {
 	 }
 		return null ;
 	}
-
+	
+	public static List<String> selcetWiringCourseInnerJoin2() {
+		url = Url.getUrl();
+		String sql = "Select CourseName "+ " From " + "Course " +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		List<String> strings = new ArrayList<String>();
+		try { 
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);	
+			while(rs.next()) {
+				strings.add(rs.getString("CourseName"));
+			}
+			return strings;
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 }
+		return null ;
+	}
 	
 	public static void selectAllTeacher() throws SQLException {
 		 url = Url.getUrl();

@@ -140,21 +140,21 @@ public class ui   {
 		mainPanel.addComponent(center.withBorder(Borders.singleLine("Panel")));
 		
 	     checkBoxList = new CheckBoxList<String>();
-		for(int i = 0 ; i < Select.selcetStudentIdArray().size(); i++ ){
-			Integer ii = Select.selcetStudentIdArray().get(i);
+		for(int i = 0 ; i < Select.selcetWiringStudentInnerJoin2().size(); i++ ){
+			String ii = Select.selcetWiringStudentInnerJoin2().get(i);
 			checkBoxList.addItem(ii.toString());
 		}
 
 		
 	    checkB2oxList = new CheckBoxList<String>();
-		for(int i = 0 ; i < Select.selcetCourseIdArray().size(); i++ ){
-			String hi =  Select.selcetCourseIdArray().get(i).toString();
+		for(int i = 0 ; i < Select.selcetWiringCourseInnerJoin2().size(); i++ ){
+			String hi =  Select.selcetWiringCourseInnerJoin2().get(i).toString();
 			checkB2oxList.addItem(hi);
 		}
 
 	   checkB3oxList = new CheckBoxList<String>();
-		for(int i = 0 ; i < Select.selcetTeacherIdArray().size(); i++ ){
-			String hi =  Select.selcetTeacherIdArray().get(i).toString();
+		for(int i = 0 ; i < Select.selcetWiringTeacherInnerJoin2().size(); i++ ){
+			String hi =  Select.selcetWiringTeacherInnerJoin2().get(i).toString();
 			checkB3oxList.addItem(hi);
 		}
 		
@@ -311,21 +311,21 @@ public class ui   {
 								 action.CourseInsert(CourseTeacher.getText().toString() , CourseTeacher.getText().toString()); 
 								 CourseTeacher.setText("");
 							     checkBoxList = new CheckBoxList<String>();
-									for(int i = 0 ; i < Select.selcetStudentIdArray().size(); i++ ){
-										Integer ii = Select.selcetStudentIdArray().get(i);
+									for(int i = 0 ; i < Select.selcetWiringStudentInnerJoin2().size(); i++ ){
+										String ii = Select.selcetWiringStudentInnerJoin2().get(i);
 										checkBoxList.addItem(ii.toString());
 									}
 
 									
 								    checkB2oxList = new CheckBoxList<String>();
-									for(int i = 0 ; i < Select.selcetCourseIdArray().size(); i++ ){
-										String hi =  Select.selcetCourseIdArray().get(i).toString();
+									for(int i = 0 ; i < Select.selcetWiringCourseInnerJoin2().size(); i++ ){
+										String hi =  Select.selcetWiringCourseInnerJoin2().get(i).toString();
 										checkB2oxList.addItem(hi);
 									}
 
 								   checkB3oxList = new CheckBoxList<String>();
-									for(int i = 0 ; i < Select.selcetTeacherIdArray().size(); i++ ){
-										String hi =  Select.selcetTeacherIdArray().get(i).toString();
+									for(int i = 0 ; i < Select.selcetWiringTeacherInnerJoin2().size(); i++ ){
+										String hi =  Select.selcetWiringTeacherInnerJoin2().get(i).toString();
 										checkB3oxList.addItem(hi);
 									}
 
@@ -386,21 +386,21 @@ public class ui   {
 								 }
 								 
 							     checkBoxList = new CheckBoxList<String>();
-									for(int i = 0 ; i < Select.selcetStudentIdArray().size(); i++ ){
-										Integer ii = Select.selcetStudentIdArray().get(i);
+									for(int i = 0 ; i < Select.selcetWiringStudentInnerJoin2().size(); i++ ){
+										String ii = Select.selcetWiringStudentInnerJoin2().get(i);
 										checkBoxList.addItem(ii.toString());
 									}
 
 									
 								    checkB2oxList = new CheckBoxList<String>();
-									for(int i = 0 ; i < Select.selcetCourseIdArray().size(); i++ ){
-										String hi =  Select.selcetCourseIdArray().get(i).toString();
+									for(int i = 0 ; i < Select.selcetWiringCourseInnerJoin2().size(); i++ ){
+										String hi =  Select.selcetWiringCourseInnerJoin2().get(i).toString();
 										checkB2oxList.addItem(hi);
 									}
 
 								   checkB3oxList = new CheckBoxList<String>();
-									for(int i = 0 ; i < Select.selcetTeacherIdArray().size(); i++ ){
-										String hi =  Select.selcetTeacherIdArray().get(i).toString();
+									for(int i = 0 ; i < Select.selcetWiringTeacherInnerJoin2().size(); i++ ){
+										String hi =  Select.selcetWiringTeacherInnerJoin2().get(i).toString();
 										checkB3oxList.addItem(hi);
 									}
 
@@ -663,9 +663,6 @@ public class ui   {
 			}
 		}));
 
- 		
- 		
-
 				
 		panel.addComponent( new Button("addStudentToTeacher" , new Runnable(){
 			@Override
@@ -682,8 +679,8 @@ public class ui   {
 				center.addComponent( hi = new Button("choose it" , new Runnable(){
 					@Override
 					public void run() {
-				      if(3 == checkB3oxList.getCheckedItems().toString().length()) {
-				        	int teacherId = Integer.parseInt(checkB3oxList.getSelectedItem().toString());
+						int inde = checkB3oxList.getSelectedIndex();
+				        	int teacherId = Select.selcetTeacherIdArray().get(inde);		        	
 				        	center.removeAllComponents();
 							center.addComponent(new Label("CourseIds"));
 				        	center.addComponent(checkB2oxList);
@@ -691,8 +688,8 @@ public class ui   {
 				        	center.addComponent(bye = new Button("Choose it" , new Runnable(){
 								@Override
 								public void run() {
-						        	if(3 == checkB2oxList.getCheckedItems().toString().length()){
-							        	int CourseId = Integer.parseInt(checkB2oxList.getSelectedItem().toString());
+									int inde = checkB2oxList.getSelectedIndex();
+							        	int CourseId = Select.selcetCourseIdArray().get(inde);
 							        	center.removeAllComponents();
 										center.addComponent(new Label("StudentId"));
 							        	center.addComponent(checkBoxList);
@@ -700,23 +697,20 @@ public class ui   {
 							        	center.addComponent(one = new Button("Submit" , new Runnable(){
 											@Override
 											public void run() {
-									        	if(checkBoxList.getCheckedItems().toString().length() != 2){
 												try {
-													List<Integer> checkedItems = Integer.parseInt(checkBoxList.getCheckedItems());										
-													for(int StudentId : checkedItems.toString())
-												{	
-													action.wiringInsert(StudentId, teacherId, CourseId);
-												}
-									        	new MessageDialogBuilder()
+													int inde = checkBoxList.getSelectedIndex();
+													int StudentId = Select.selcetStudentIdArray().get(inde);
+													action.wiringInsert(StudentId , teacherId, CourseId);
+													new MessageDialogBuilder()
 									    		.setTitle("It Was Succsus").setText("we details submited").build().showDialog(text);
 												} catch (SQLException e) {
 													e.printStackTrace();
 												}
-									         }
+									         
 											}
 							        	}));
 							        	one.takeFocus();		        	
-						        	}
+						        	
 								}
 				        	}));
 				        	bye.takeFocus();	
@@ -724,12 +718,6 @@ public class ui   {
 								if(center.containsComponent(label)){
 								 center.removeComponent(label);
 							 }
-							}
-				        else {
-				        	if(!center.containsComponent(label)){
-				        		label.addTo(center);
-				        	}
-				        }
 				      }
 		        }));
 			 }			
