@@ -17,7 +17,7 @@ public class TeacherOrmLite {
 	@DatabaseField(generatedId = true)
 	private int Id;
 
-	@DatabaseField(foreign = true, columnName = ACCOUNT_ID_FIELD_NAME)
+	@DatabaseField(foreign = true, columnName = ACCOUNT_ID_FIELD_NAME , foreignAutoRefresh = true)
 	private StudentOrmLite student;
 	
 	@DatabaseField(columnName = Teacher_Age , canBeNull = false)

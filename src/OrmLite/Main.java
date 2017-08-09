@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
@@ -17,6 +18,8 @@ public class Main {
 	
 	private Dao<TeacherOrmLite , Integer> teacherDao;
 
+	private Dao<StudentOrmLite , Integer> studentDao;
+	
 	String ormUrl = "jdbc:sqlite:C:/sqlite/db/ormLiteDataBase.db";
 
 	public static void main(String[] args) throws SQLException {
@@ -29,8 +32,9 @@ public class Main {
 		
 		teacherDao = DaoManager.createDao(connectionSource, TeacherOrmLite.class);
 		
-		TableUtils.createTable(connectionSource, TeacherOrmLite.class);
+		studentDao = DaoManager.createDao(connectionSource, StudentOrmLite.class);
 		
+
 	}
 	
 	public void doMain(String[] args) throws SQLException{
@@ -51,18 +55,32 @@ public class Main {
 	}
 
 	private void readAndWriteDate() throws SQLException{
-		TeacherOrmLite ali = new TeacherOrmLite( 9 , "ali" , "hasani" );
-		int aliId = ali.getId();
 		
-		teacherDao.create(ali);
-		VerifyDb(aliId);
+		StudentOrmLite taha = new StudentOrmLite("ali" , " taha" , "math");
+		
+		TeacherOrmLite ali = new TeacherOrmLite( 9 , "ali" , "hasani"  , taha );
+		
+		TeacherOrmLite keivan = new TeacherOrmLite( 18 , "keivan" , "hossein"  , taha );
 	
+		TeacherOrmLite ramim = new TeacherOrmLite( 19 , "ramim" , "hossein"  , taha );
+
+		StudentOrmLite meh = new StudentOrmLite("meh " , " meh" , "math");
+
+		TeacherOrmLite moh = new TeacherOrmLite( 100 , "moh" , "moh"  , meh );
+
+		TeacherOrmLite search = teacherDao.queryForId(taha.getId());
+		
 		List<TeacherOrmLite> teacherList = teacherDao.queryForAll();
+		teacherList.size();
 		
 		QueryBuilder<TeacherOrmLite , Integer> query = teacherDao.queryBuilder();
-		query.where().like(ali.First_Name_Column_Teacher, "ali");
+		query.where().like(ali.First_Name_Column_Teacher, "keivan");
+		
+		TeacherOrmLite teacher = teacherDao.queryForId(ramim.getId());
 		
 		teacherList = teacherDao.query(query.prepare());
+
+				
 	}
 	
 	private void VerifyDb(int id) throws SQLException{
