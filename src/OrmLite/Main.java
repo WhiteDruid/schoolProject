@@ -70,16 +70,25 @@ public class Main {
 
 		TeacherOrmLite search = teacherDao.queryForId(taha.getId());
 		
-		List<TeacherOrmLite> teacherList = teacherDao.queryForAll();
-		teacherList.size();
+		StudentOrmLite al = new StudentOrmLite("al" , " taha" , "math");
 		
+		StudentOrmLite accountResult = studentDao.queryForId(al.getId());
+		ForeignCollection<TeacherOrmLite> orders = accountResult.getTeachers();
+
 		QueryBuilder<TeacherOrmLite , Integer> query = teacherDao.queryBuilder();
 		query.where().like(ali.First_Name_Column_Teacher, "keivan");
 		
-		TeacherOrmLite teacher = teacherDao.queryForId(ramim.getId());
+		StudentOrmLite AI = new StudentOrmLite("taha" , "taha" , "taha");
 		
-		teacherList = teacherDao.query(query.prepare());
-
+		studentDao.create(AI);
+		
+		StudentOrmLite teacher = studentDao.queryForId(AI.getId());
+		
+		ForeignCollection<TeacherOrmLite> TeacherOrmLite = teacher.getTeachers();
+		
+		for(TeacherOrmLite me : TeacherOrmLite){
+			System.out.println(me.getFirstName());
+		}
 				
 	}
 	

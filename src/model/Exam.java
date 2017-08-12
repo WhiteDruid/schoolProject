@@ -5,12 +5,10 @@ import java.util.Date;
 public class Exam {
 
 	private Date date;
-	
-	private Teacher teacher;
-	
+		
 	private Student student;
 	
-	private float resualt;
+	private float score;
 	
 	private Course course;
 
@@ -22,13 +20,6 @@ public class Exam {
 		this.date = date;
 	}
 
-	public String getTeacher() {
-		return teacher.getName();
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
 
 	public Student getStudent() {
 		return student;
@@ -38,13 +29,6 @@ public class Exam {
 		this.student = student;
 	}
 
-	public float getResualt() {
-		return resualt;
-	}
-
-	public void setResualt(float resualt) {
-		this.resualt = resualt;
-	}
 
 	public Course getCourse() {
 		return course;
@@ -55,8 +39,16 @@ public class Exam {
 	}
 	
 	public void Strings() { 
-		System.out.print(getResualt() + " " + getCourse().getName() + " " + getTeacher() + " " + getStudent().getName() + " " +
+		System.out.print(getScore()+ " " + getCourse().getName() + " " + getStudent().getName() + " " +
 				getDate().toString());
+	}
+
+	public float getScore() {
+		return score;
+	}
+
+	public void setScore(float score) {
+		this.score = score;
 	}
 	
 }

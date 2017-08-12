@@ -11,8 +11,9 @@ import java.util.Vector;
 
 import GUI.ui;
 
-public class Select {
+public class Select  {
 	
+
 	private static String url;
 
 	public static Connection connection() {
@@ -49,6 +50,43 @@ public class Select {
 		 conn.close();
 	 }
   }
+	
+	
+	public static ArrayList<String> selectAllStudentJson() throws SQLException {
+		url = Url.getUrl();
+		String sql = "Select * "+ " From " + "Student" +  ";";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stat = null;
+		ArrayList<String> str = null;
+		try {
+			str = new ArrayList<>();
+			conn =  connection();
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			while(rs.next()) {
+		str.toString().replaceAll(",", "");		
+		 str.add("{ " + '"' + TableAction.StudentId +'"'	+":" + '"' + rs.getString("StudentId") + '"' + " "
+			+ "," + " " + '"' + TableAction.Studentname + '"' +  ":" + '"' + rs.getString("StudentName") + '"' + " "  +
+			 ", " + " " + '"' + TableAction.StudentAge + '"' +  ":" + '"' + rs.getInt("StudentAge") + '"' + " "  + "} "
+						);
+			}
+		}catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	 } finally {
+		 conn.close();
+	 }
+	return str;
+	}
+	
+	public String str() throws SQLException {
+		ArrayList<String> str = new ArrayList<String>();
+		for(int i = 0 ; i < selectAllStudentJson().size() ; i++){
+			String myStr = selectAllStudentJson().get(i).toString() ;
+			str.add(myStr);
+		}
+		return str.toString();
+	}
 	
 	public static List<String> selcetStudentAge() {
 		url = Url.getUrl();
