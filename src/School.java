@@ -1,26 +1,13 @@
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.table.TableUtils;
-
 import model.*;
 import Database.*;
-import OrmLite.TeacherOrmLite;
 
 public class School {
 	
-	private Dao<TeacherOrmLite , Integer> teacherDao;
-
-	String ormUrl = "jdbc:sqlite:C:/sqlite/db/ormLiteDataBase.db";
-
 	public static void main(String[] args) throws SQLException {
 		
 		ArrayList<Course> TahaCourse = new ArrayList<Course>();
@@ -33,7 +20,7 @@ public class School {
 		Repository rep = new Repository();
 		Teacher henry = new Teacher();
 		TableAction tables = new TableAction();
-		Select select = new Select();
+		TableAction Actions = new TableAction();
 		
 		math.setName("math");
 		math.setTeacher(brayan);
@@ -59,16 +46,16 @@ public class School {
 		
 		mathExam.setCourse(math);
 		mathExam.setDate(date);
-		mathExam.setScore(19);
+		mathExam.setResualt(19);
 		mathExam.setStudent(Taha);
+		mathExam.setTeacher(brayan);
 		mathExam.Strings();
 		
-		rep.CreateDatabase();
+		rep.CreateDatabase("tahaDataBase.db");
 		tables.createCourceTable();
 		tables.createTeacherTable();
 		tables.createStudentTable();
-		tables.createWiringTable();
-		
+		Actions.TeacherInsert(brayan);
 	}
-	
+
 }
